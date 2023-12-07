@@ -6,6 +6,10 @@ router.get('/', async(req,res) => {
     res.json(await controller.getTodoItems());
 })
 
+router.get('/:id', async(req,res) => {
+    res.json(await controller.getItem(req.params.id));
+})
+
 router.post('/', async(req,res) => {
     res.json(await controller.newTodoItem(req.body));
 })

@@ -1,0 +1,28 @@
+const data = require('../data/todoItem');
+
+async function getTodoItems(){
+    return data.getTodoItems();
+}
+
+async function getItem(id){
+    return data.getItem(id);
+}
+
+async function newTodoItem(item){
+    return data.newTodoItem(item);
+}
+
+async function deleteTodoItem(id){
+    let item = await getItem(id);
+    if(item != undefined){
+        return data.deleteTodoItem(item);
+    }else{
+        console.log("Item no encontrado");
+    }
+}
+
+async function putTodoItem(id, item){
+    return data.putTodoItem(id, item);
+}
+
+module.exports = {getTodoItems, newTodoItem, deleteTodoItem, putTodoItem}
