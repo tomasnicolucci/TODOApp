@@ -11,7 +11,7 @@ router.get('/:id', async(req,res) => {
 })
 
 router.post('/', async(req,res) => {
-    res.json(await controller.newTodoItem(req.body));
+    res.json(await controller.addTodoItem(req.body));
 })
 
 router.delete('/:id', async(req,res) => {

@@ -5,7 +5,9 @@ var cors = require('cors');
 
 const app = express()
 const port = (process.env.PORT || '3002')
+const itemsRouter = require('../routes/todoItem');
 
+app.use('/items', itemsRouter);
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 app.listen(port, () => console.log(`listening on port ${port}`));

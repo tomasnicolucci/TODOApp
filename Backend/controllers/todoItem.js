@@ -8,8 +8,8 @@ async function getItem(id){
     return data.getItem(id);
 }
 
-async function newTodoItem(item){
-    return data.newTodoItem(item);
+async function addTodoItem(item){
+    return data.addTodoItem(item);
 }
 
 async function deleteTodoItem(id){
@@ -25,4 +25,4 @@ async function putTodoItem(id, item){
     return data.putTodoItem(id, item);
 }
 
-module.exports = {getTodoItems, newTodoItem, deleteTodoItem, putTodoItem}
+module.exports = {getTodoItems, getItem, addTodoItem, deleteTodoItem, putTodoItem};

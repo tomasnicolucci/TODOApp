@@ -1,26 +1,48 @@
 require('dotenv').config();
+const { ObjectId } = require('mongodb');
 const conn = require('../dbConnection/connection');
-const DATABASE = '';
-const ITEMS = '';
+const DATABASE = 'TODOApp';
+const ITEMS = 'items';
 
 async function getTodoItems(){
-
+    const connection = await conn.getConnection();
+    const items = await connection
+                        .db(DATABASE)
+                        .collection(ITEMS)
+                        .find()
+                        .toArray();
+    return items;
 }
 
 async function getItem(id){
-
+    const connection = await conn.getConnection();
+    const item = await connection
+                        .db(DATABASE)
+                        .collection(ITEMS)
+                        .findOne({_id: new ObjectId(id)});
+    return item;
 }
 
-async function newTodoItem(item){
-
+async function addTodoItem(item){
+    const connection = await conn.getConnection();
+    const result = await connection
+                        .db(DATABASE)
+                        .collection(ITEMS)
+                        .insertOne(item);
+    return result;
 }
 
-async function deleteTodoItem(id){
-
+async function deleteTodoItem(item){
+    const connection = await conn.getConnection();
+    const result = await connection
+                        .db(DATABASE)
+                        .collection(ITEMS)
+                        .deleteOne(item);
+    return result;
 }
 
 async function putTodoItem(id, item){
 
 }
 
-module.exports = {getTodoItems, getItem, newTodoItem, deleteTodoItem, putTodoItem};
+module.exports = {getTodoItems, getItem, addTodoItem, deleteTodoItem, putTodoItem};
