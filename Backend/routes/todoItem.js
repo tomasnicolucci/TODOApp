@@ -11,7 +11,8 @@ router.get('/:id', async(req,res) => {
 })
 
 router.post('/', async(req,res) => {
-    res.json(await controller.addTodoItem(req.body));
+    const result = await controller.addTodoItem(req.body);
+    res.json(result);
 })
 
 router.delete('/:id', async(req,res) => {

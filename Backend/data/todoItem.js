@@ -42,7 +42,12 @@ async function deleteTodoItem(item){
 }
 
 async function putTodoItem(id, item){
-
+    const connection = await conn.getConnection();
+    const result = await connection
+        .db(DATABASE)
+        .collection(ITEMS)
+        .updateOne({_id: new ObjectId(id)}, {$set: {title: item.title}})
+    return result;
 }
 
 module.exports = {getTodoItems, getItem, addTodoItem, deleteTodoItem, putTodoItem};
