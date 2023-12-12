@@ -26,4 +26,15 @@ async function putTodoItem(id, item){
     return data.putTodoItem(id, item);
 }
 
-module.exports = {getTodoItems, getItem, addTodoItem, deleteTodoItem, putTodoItem};
+async function markCompleted(id){
+    const item = await getItem(id);
+    let state = item.completed;
+    if(!state){
+        state = true;
+    }else{
+        state = false;
+    }
+    return data.markCompleted(id, state)
+}
+
+module.exports = {getTodoItems, getItem, addTodoItem, deleteTodoItem, putTodoItem, markCompleted};

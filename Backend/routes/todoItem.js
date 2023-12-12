@@ -23,4 +23,8 @@ router.put('/:id', async(req,res) => {
     res.json(await controller.putTodoItem(req.params.id, req.body));
 })
 
+router.post('/:id', async(req,res) => {
+    res.json(await controller.markCompleted(req.params.id));
+})
+
 module.exports = router;
