@@ -1,6 +1,8 @@
 require('dotenv').config();
 const { ObjectId } = require('mongodb');
 const conn = require('../dbConnection/connection');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const DATABASE = 'TODOApp';
 const USERS = 'users';
 
@@ -50,4 +52,27 @@ async function putUser(id, user){
     return result;                    
 }
 
-module.exports = {getUsers, getUser, addUser, deleteUser, putUser};
+async function findByCredential(email, password){
+    const connection = await conn.getConnection();
+    const user = await connection
+                        .db(DATABASE)
+                        .collection(USERS)
+                        .findOne({email: email});
+    if(!user){
+        throw new Error('Usuario o contraseña incorrectos');
+    }
+    
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if(!isMatch){
+        throw new Error('Usuario o contraseña incorrectos');
+    }
+    return user;
+}
+
+async function generatedToken(user){
+    const token = jwt.sign({_id: user._id, email: user.email}, process.env.CLAVE_TOKEN, {expiresIn: "1h"});
+    return token;
+}
+
+module.exports = {getUsers, getUser, addUser, deleteUser, putUser, findByCredential, generatedToken};
