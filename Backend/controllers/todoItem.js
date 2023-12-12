@@ -9,8 +9,7 @@ async function getItem(id){
 }
 
 async function addTodoItem(item){
-    let itemNuevo = item;
-    return data.addTodoItem(itemNuevo);
+    return data.addTodoItem(item);
 }
 
 async function deleteTodoItem(id){
