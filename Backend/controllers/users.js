@@ -1,4 +1,5 @@
 const data = require('../data/users');
+const bcrypt = require('bcrypt');
 
 async function getUsers(){
     return data.getUsers();
@@ -9,6 +10,8 @@ async function getUser(id){
 }
 
 async function addUser(user){
+    let password = await bcrypt.hash(user.password,10);
+    user.password = password;
     return data.addUser(user);
 }
 
@@ -25,4 +28,12 @@ async function putUser(id, user){
     return data.putUser(id, user);
 }
 
-module.exports = {getUsers, getUser, addUser, deleteUser, putUser};
+async function findByCredential(email, password){
+    return data.findByCredential(email, password);
+}
+
+async function generatedToken(user){
+    return data.generatedToken(user);
+}
+
+module.exports = {getUsers, getUser, addUser, deleteUser, putUser, findByCredential, generatedToken};
