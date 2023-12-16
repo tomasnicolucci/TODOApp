@@ -30,7 +30,7 @@ async function addUser(user){
     const result = await connection
                         .db(DATABASE)
                         .collection(USERS)
-                        .intsertOne(user);
+                        .insertOne(user);
     return result;                    
 }
 
@@ -53,11 +53,14 @@ async function putUser(id, user){
 }
 
 async function findByCredential(email, password){
+    console.log(email);
+    console.log(password);
     const connection = await conn.getConnection();
     const user = await connection
                         .db(DATABASE)
                         .collection(USERS)
                         .findOne({email: email});
+    console.log(user);
     if(!user){
         throw new Error('Usuario o contraseña incorrectos');
     }
