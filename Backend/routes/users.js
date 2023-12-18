@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/users');
-//const validateCreate = require('../validators/usersValidation');
-const {body, validationResult} = require('express-validator');
+const {validateCreate} = require('../validators/usersValidation');
 
 router.get('/', async(req,res) => {
     res.json(await controller.getUsers());
@@ -12,22 +11,12 @@ router.get('/:id', async(req,res) => {
     res.json(await controller.getUser(req.params.id));
 })
 
-router.post('/', [
-    body('name', 'Ingrese un nombre')
-        .exists()
-        .notEmpty(),
-    body('email', 'Ingrese un email')
-        .exists()
-        .isEmail()
-], async(req,res) => {
-    const errors = validationResult(req);
-    if(!errors.isEmpty()){
-        return res.json({ errors: errors.array()});
-    }else{
-        res.json(await controller.addUser(req.body));
+router.post('/', validateCreate, async(req,res) => {
+    try{
+        res.json(await controller.addUser(req,res));
+    } catch(error){
+        res.status(500).json({message: 'Route error'});
     }
-      
-    
 })
 
 router.delete('/:id', async(req,res) => {

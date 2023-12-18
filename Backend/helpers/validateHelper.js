@@ -1,12 +1,15 @@
 const { validationResult } = require('express-validator');
 
-const validateResult = (req,res, next) => {
+async function validateResult(req, res, next) {
     try{
-        validationResult(req).throw()
-        return next()
-    } catch (error) {
-        res.send({ errors : error.array() })
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return res.status(400).json({ errors : errors.array() })
+        }
+        await next();
+    } catch(error) {
+        res.status(500).json({message: 'Helper error'})
     }
 }
 
-module.exports = {validateResult}
+module.exports = validateResult;

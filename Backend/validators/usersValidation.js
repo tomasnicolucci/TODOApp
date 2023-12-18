@@ -1,15 +1,18 @@
-const { check } = require('express-validator');
+const { body } = require('express-validator');
 const validateResult = require('../helpers/validateHelper');
 
 const validateCreate = [
-    check('name')
+    body('name', 'Ingrese un nombre válido')
         .exists()
         .notEmpty(),
-    check('email')
+    body('email', 'Ingrese un email válido')
         .exists()
         .isEmail(),
+    body('password', 'Ingrese una contraseña válida')
+        .exists()
+        .isLength({ min:8 }),
     (req, res, next) => {
-        validateResult(req, res, next)
+        validateResult(req,res,next);
     }
 ]
 
