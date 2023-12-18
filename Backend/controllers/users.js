@@ -9,10 +9,16 @@ async function getUser(id){
     return data.getUser(id);
 }
 
-async function addUser(user){
-    let password = await bcrypt.hash(user.password,10);
-    user.password = password;
-    return data.addUser(user);
+async function addUser(req, res){
+    try{
+        let userData= req.body;
+        let password = await bcrypt.hash(userData.password,10);
+        userData.password = password;
+        data.addUser(userData);
+        res.status(201).json({message: 'Creado'});
+    }catch{
+        res.status(500).json({message: 'Error'});
+    } 
 }
 
 async function deleteUser(id){
