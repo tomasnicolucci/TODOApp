@@ -1,7 +1,23 @@
-export default function Item(props){
+import React, {useContext} from 'react';
+import { ItemsContext } from '../../Context/ItemsContext';
+
+function Item(){
+    const { items } = useContext(ItemsContext);
+
     return (
+      
         <div>
-          <p>{props.title}</p>  
+          {
+            items ?
+            items.map((item) => {
+              return <p>{item.title}</p>
+            })
+            :
+            <></>
+          }     
         </div>
+      
     )
 }
+
+export default Item
