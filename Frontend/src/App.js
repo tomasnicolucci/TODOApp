@@ -3,11 +3,18 @@ import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import Navbar from './components/Navbar/Navbar.jsx';
 import ItemList from './components/ItemList';
+import Form from './components/Form.jsx';
 import {getItems} from './Services/Items/index.js';
 
 function App() {
 
+  const [item, setItem] = useState({
+    title: ''
+  })
+
   const [items, setItems] = useState([])
+
+  const [update, setUpdate] = useState(false)
 
   useEffect(() => {
     const obtenerItems = async () => {
@@ -19,7 +26,8 @@ function App() {
       }
   };
     obtenerItems();
-  }, [])
+    setUpdate(false);
+  }, [update])
 
   return (
     <>
@@ -29,27 +37,16 @@ function App() {
         <div className='row'>
           <div className='col-6'>
             <h2 style={{textAlign: 'center'}}>Tareas</h2>
-            <ItemList items={items}/>
+            <ItemList item={item} setItem={setItem} items={items} setUpdate={setUpdate}/>
           </div>
           <div className='col-6'>
             <h2 style={{textAlign: 'center'}}>Agregar nueva tarea</h2>
-            <input type='text' placeholder='nombre'></input>
-            <button>Agregar</button>
+            <Form item={item} setItem={setItem}/>
           </div>
         </div>
       </div>
     </Fragment>
-    {/* <div>
-        <h1 className="titulo">TODO APP</h1>
-
-        <h3>Agregar item nuevo</h3> <br/>
-        <input type='text' placeholder='nombre'></input>
-        <button>Agregar</button>
-        <p>
-         
-          <Item></Item>
-        </p>
-    </div> */}
+    
     </>
   );
 }
