@@ -9,6 +9,7 @@ async function getItem(id){
 }
 
 async function addTodoItem(item){
+    item.completed = false;
     return data.addTodoItem(item);
 }
 
