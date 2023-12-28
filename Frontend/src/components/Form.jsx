@@ -28,6 +28,8 @@ const Form = ({item, setItem}) => {
     }
 
     return(
+        <>
+        <h2 style={{textAlign: 'center'}}>Agregar nueva tarea</h2>
         <form onSubmit={handleSubmit}>
             <div className="mb-3">
                 <label className="form-label">Nombre</label>
@@ -35,6 +37,7 @@ const Form = ({item, setItem}) => {
             </div>
             <button type="submit" className="btn btn-primary">Guardar</button>
         </form>
+        </>
     );
 }
 
