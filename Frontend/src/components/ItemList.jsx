@@ -39,11 +39,13 @@ const ItemList = ({item, setItem, items, setUpdate}) => {
     }
 
     return(
+        <>
+        <h2 style={{textAlign: 'center'}}>Tareas pendientes</h2>
         <table className="table table-hover table-striped table-dark table-bordered">
             <thead>
                 <tr>
-                    <th>Nombre</th>
-                    <th>Check</th>
+                    <th>Tarea</th>
+                    <th>Finalizada</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -52,13 +54,48 @@ const ItemList = ({item, setItem, items, setUpdate}) => {
                 {items.map(item => (
                     <tr key={item._id}>
                         <td>{item.title}</td>
-                        <td>check1</td>
-                        <td><button onClick={() => handleUpdate(item._id)} className="btn btn-outline-warning">Editar</button></td>
-                        <td><button onClick={() => handleDelete(item._id)} className="btn btn-danger">Eliminar</button></td>
+                        <td>
+                            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                        </td>
+                        <td>
+                            <button onClick={() => handleUpdate(item._id)} className="btn btn-outline-warning">Editar</button>
+                        </td>
+                        <td>
+                            <button onClick={() => handleDelete(item._id)} className="btn btn-danger">Eliminar</button>
+                        </td>
                     </tr>
                 ))}
             </tbody>
         </table>
+        
+        <h2 style={{textAlign: 'center'}}>Tareas finalizadas</h2>
+        <table className="table table-hover table-striped table-dark table-bordered">
+            <thead>
+                <tr>
+                    <th>Tarea</th>
+                    <th>Finalizada</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {items.map(item => (
+                    <tr key={item._id}>
+                        <td>{item.title}</td>
+                        <td>
+                            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                        </td>
+                        <td>
+                            <button onClick={() => handleUpdate(item._id)} className="btn btn-outline-warning">Editar</button>
+                        </td>
+                        <td>
+                            <button onClick={() => handleDelete(item._id)} className="btn btn-danger">Eliminar</button>
+                        </td>
+                    </tr>
+                ))}
+            </tbody>
+        </table>
+        </>
     );
 }
 

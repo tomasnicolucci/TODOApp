@@ -36,11 +36,9 @@ function App() {
       <div className='container'>
         <div className='row'>
           <div className='col-6'>
-            <h2 style={{textAlign: 'center'}}>Tareas</h2>
             <ItemList item={item} setItem={setItem} items={items} setUpdate={setUpdate}/>
           </div>
           <div className='col-6'>
-            <h2 style={{textAlign: 'center'}}>Agregar nueva tarea</h2>
             <Form item={item} setItem={setItem}/>
           </div>
         </div>
