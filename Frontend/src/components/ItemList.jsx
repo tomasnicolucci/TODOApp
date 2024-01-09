@@ -1,5 +1,5 @@
 import React from 'react'
-import { deleteItem, putItem } from '../Services/Items/index.js';
+import { deleteItem, putItem, checkItem } from '../Services/Items/index.js';
 
 const ItemList = ({item, setItem, items, setUpdate}) => {
 
@@ -38,6 +38,18 @@ const ItemList = ({item, setItem, items, setUpdate}) => {
         setUpdate(true);
     }
 
+    const handleCheck = async (id) => {
+        const request = {
+            method: 'POST'
+        }
+        try{
+            await checkItem(id, request);
+            setUpdate(true);
+        } catch(error){
+            console.log(error);
+        }
+    }
+
     return(
         <>
         <h2 style={{textAlign: 'center'}}>Tareas pendientes</h2>
@@ -56,7 +68,7 @@ const ItemList = ({item, setItem, items, setUpdate}) => {
                         (<tr key={item._id}>
                             <td>{item.title}</td>
                             <td>
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input onClick={() => handleCheck(item._id)} className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
                             </td>
                             <td>
                                 <button onClick={() => handleUpdate(item._id)} className="btn btn-outline-warning">Editar</button>

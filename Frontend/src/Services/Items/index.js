@@ -40,3 +40,8 @@ export const putItem = (id, req) => {
         console.log(error);
     })
 }
+
+export const checkItem = (id) => {
+    return fetch('http://localhost:3002/items/' + id)
+    
+}
