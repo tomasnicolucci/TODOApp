@@ -56,8 +56,8 @@ const ItemList = ({item, setItem, items, setUpdate}) => {
         <table className="table table-hover table-striped table-dark table-bordered">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Tarea</th>
-                    <th>Finalizada</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -66,9 +66,11 @@ const ItemList = ({item, setItem, items, setUpdate}) => {
                 {items.map(item => (
                     (!item.completed) ?
                         (<tr key={item._id}>
-                            <td>{item.title}</td>
                             <td>
-                                <input onClick={() => handleCheck(item._id)} className="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
+                                <input onClick={() => handleCheck(item._id)} className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/> 
+                            </td>
+                            <td>
+                                {item.title}
                             </td>
                             <td>
                                 <button onClick={() => handleUpdate(item._id)} className="btn btn-outline-warning">Editar</button>
@@ -86,8 +88,8 @@ const ItemList = ({item, setItem, items, setUpdate}) => {
         <table className="table table-hover table-striped table-dark table-bordered">
             <thead>
                 <tr>
+                    <th></th>
                     <th>Tarea</th>
-                    <th>Finalizada</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -96,9 +98,11 @@ const ItemList = ({item, setItem, items, setUpdate}) => {
                 {items.map(item => (
                     (item.completed) ?
                         (<tr key={item._id}>
-                            <td>{item.title}</td>
                             <td>
-                                <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked="true" />
+                                <input onClick={() => handleCheck(item._id)} className="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked="true"/> 
+                            </td>
+                            <td>
+                                {item.title}
                             </td>
                             <td>
                                 <button onClick={() => handleUpdate(item._id)} className="btn btn-outline-warning">Editar</button>

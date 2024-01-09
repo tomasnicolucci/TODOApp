@@ -41,7 +41,12 @@ export const putItem = (id, req) => {
     })
 }
 
-export const checkItem = (id) => {
-    return fetch('http://localhost:3002/items/' + id)
-    
+export const checkItem = (id, req) => {
+    return fetch('http://localhost:3002/items/' + id, req)
+    .then(response => {
+        return response.json();
+    })
+    .catch(error => {
+        console.log(error);
+    })
 }
